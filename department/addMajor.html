@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>关联课程信息与老师</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="../lib/layui-v2.6.3/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/public.css" media="all">
+	</head>
+	<body>
+		<div class="layuimini-container">
+		    <div class="layuimini-main">
+		        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+		            <legend style="text-align: center ;.bold-text " >关联课程信息与老师</legend>
+		        </fieldset>
+			<form class="layui-form" action="">
+				<div class="layui-form-item">
+				    <div class="layui-inline">
+				        <label class="layui-form-label">*选择课程</label>
+				        <div class="layui-input-inline">
+				            <select name="modules" lay-verify="required" lay-search="">
+				                <option value="1" selected="">001 大学计算机基础</option>
+				                <option value="2" >002 高等数学（上）</option>
+				                <option value="3">003 微观经济学</option>
+				                <option value="4">004 现代汉语</option>
+				                <option value="5">005 电路分析基</option>
+				                <option value="6" >006 普通生物学</option>
+				                <option value="7">007 管理学原理</option>
+				                <option value="8"> 008 大学物理（下）</option>
+				                <option value="9">009 程序设计基础</option>
+				                <option value="10" >010 中国近现代史纲要</option>
+				                <option value="11">011 有机化学</option>
+				                <option value="12">012 市场营销学</option>
+				                <option value="13">013 数据结构与算法</option>
+				                <option value="14" > 014 心理学导论</option>
+				                <option value="15">015 工程制图</option>
+				                <option value="16">016 国际贸易理论与实务</option>
+				                <option value="17"> 017 环境科学基础</option>
+				                <option value="18" >018 线性代数</option>
+				                <option value="19">019 新闻采访与写作</option>
+								 <option value="19">020 数据库原理与应用</option>
+				            </select>
+				        </div>
+				    </div>
+				</div>
+				<div class="layui-form-item">
+				    <div class="layui-inline">
+				        <label class="layui-form-label">*选择教师</label>
+				        <div class="layui-input-inline">
+				            <select name="modules" lay-verify="required" lay-search="">
+				                <option value="1" selected="">张明 - 教授（计算机科学与技术学院）</option>
+				                <option value="2" >李娜 - 副教授（外国语学院）</option>
+				                <option value="3">王浩 - 教授（机械工程学院）</option>
+				                <option value="4">陈雨 - 讲师（文学院</option>
+				                <option value="5">赵阳 - 教授（经济管理学院）</option>
+				                <option value="6" >孙雪 - 副教授（化学与材料工程学院）</option>
+				                <option value="7">周明 - 讲师（教育科学学院）</option>
+				                <option value="8"> 吴芳 - 教授（医学院）</option>
+				                <option value="9">郑涛 - 副教授（数学与统计学院）</option>
+				                <option value="10" >钱悦 - 讲师（艺术学院）</option>
+				            </select>
+				        </div>
+				    </div>
+				</div>
+				<div class="layui-form-item">
+				    <div class="layui-input-block">
+				        <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+				        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				    </div>
+				</div>
+			</form>
+		</div>
+	</div>
+<script src="../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+	</body>
+</html>

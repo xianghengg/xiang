@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公告展示</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+	<link rel="icon" type="image/png" sizes="64x64" href="1125.png">
+
+    <!-- 配置Tailwind自定义颜色和字体 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#6B7280',
+                        accent: '#3B82F6',
+                        light: '#F9FAFB',
+                        dark: '#1F2937'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- 自定义工具类 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .announcement-card {
+                @apply bg-white rounded-lg shadow-md p-5 mb-4 transition-all duration-300 hover:shadow-lg border-l-4 border-primary;
+            }
+            .btn-primary {
+                @apply bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-all duration-300;
+            }
+            .section-title {
+                @apply text-[clamp(1.5rem,3vw,2rem)] font-bold text-dark mb-6;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+    <!-- 顶部导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-bullhorn text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold text-primary">公告中心</h1>
+            </div>
+            
+            <nav class="hidden md:flex space-x-6">
+                <a href="#" class="text-primary font-medium">全部公告</a>
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors">重要通知</a>
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors">活动信息</a>
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors">常见问题</a>
+            </nav>
+            
+            <button class="md:hidden text-gray-600" id="menu-toggle">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#" class="text-primary font-medium py-2">全部公告</a>
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors py-2">重要通知</a>
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors py-2">活动信息</a>
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors py-2">常见问题</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 页面标题和搜索 -->
+        <div class="mb-8">
+            <h2 class="section-title">最新公告</h2>
+            
+            <div class="relative max-w-md">
+                <input 
+                    type="text" 
+                    id="search-input"
+                    placeholder="搜索公告..." 
+                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                >
+                <i class="fa fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+            </div>
+        </div>
+        
+        <!-- 公告筛选标签 -->
+        <div class="flex flex-wrap gap-2 mb-6">
+            <button class="bg-primary text-white px-4 py-1.5 rounded-full text-sm">全部</button>
+            <button class="bg-white text-gray-600 px-4 py-1.5 rounded-full text-sm hover:bg-gray-100 transition-colors">重要</button>
+            <button class="bg-white text-gray-600 px-4 py-1.5 rounded-full text-sm hover:bg-gray-100 transition-colors">活动</button>
+            <button class="bg-white text-gray-600 px-4 py-1.5 rounded-full text-sm hover:bg-gray-100 transition-colors">系统</button>
+            <button class="bg-white text-gray-600 px-4 py-1.5 rounded-full text-sm hover:bg-gray-100 transition-colors">更新</button>
+        </div>
+        
+        <!-- 公告列表和详情区域 -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- 公告列表 -->
+            <div class="lg:col-span-2">
+                <div id="announcements-list">
+                    <!-- 公告项1 - 重要 -->
+                    <div class="announcement-card" data-id="1">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full">重要</span>
+                            <span class="text-gray-500 text-sm">2025-06-30</span>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2 hover:text-primary transition-colors cursor-pointer announcement-title">教评系统延迟关闭三日</h3>
+                        <p class="text-gray-600 mb-3 line-clamp-2 announcement-content">原定于 2025 年 7 月 1 日关闭的教评系统，
+						延迟至 7 月 4 日 23:59 关闭，未完成的师生请尽快操作。
+						</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500"><i class="fa fa-eye mr-1"></i> 1258</span>
+                            <button class="text-primary text-sm hover:underline view-details">查看详情 <i class="fa fa-angle-right ml-1"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- 公告项2 - 活动 -->
+                    <div class="announcement-card" data-id="2">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="bg-green-100 text-green-600 text-xs px-2 py-1 rounded-full">活动</span>
+                            <span class="text-gray-500 text-sm">2025- 6 -25</span>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2 hover:text-primary transition-colors cursor-pointer announcement-title">教评系统将于 2025 年 7 月 1 日关闭</h3>
+                        <p class="text-gray-600 mb-3 line-clamp-2 announcement-content">教评系统将于 7 月 1 日 23:59 关闭，提醒全体师生在关闭前完成本学期课程评价，疑问可联系教务处。</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500"><i class="fa fa-eye mr-1"></i> 3562</span>
+                            <button class="text-primary text-sm hover:underline view-details">查看详情 <i class="fa fa-angle-right ml-1"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- 公告项3 - 系统 -->
+                    <div class="announcement-card" data-id="3">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded-full">系统</span>
+                            <span class="text-gray-500 text-sm">2025-06-25</span>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2 hover:text-primary transition-colors cursor-pointer announcement-title">未教评的科目不能查看对应成绩</h3>
+                        <p class="text-gray-600 mb-3 line-clamp-2 announcement-content">未完成教学评价的科目，学生将无法查看对应成绩，完成评价后可正常查看，特殊情况联系学院教学办公室。</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500"><i class="fa fa-eye mr-1"></i> 2154</span>
+                            <button class="text-primary text-sm hover:underline view-details">查看详情 <i class="fa fa-angle-right ml-1"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- 公告项4 - 普通 -->
+                    <div class="announcement-card" data-id="4">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">重要</span>
+                            <span class="text-gray-500 text-sm">2025-06-22</span>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2 hover:text-primary transition-colors cursor-pointer announcement-title">教评明日开始</h3>
+                        <p class="text-gray-600 mb-3 line-clamp-2 announcement-content">教学评价于 2025 年 6 月 21 日启动，
+						师生需登录系统分别对学生学习情况和课程教学情况评价，系统每日 8:00-22:00 开放。</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500"><i class="fa fa-eye mr-1"></i> 1876</span>
+                            <button class="text-primary text-sm hover:underline view-details">查看详情 <i class="fa fa-angle-right ml-1"></i></button>
+                        </div>
+                    </div>
+					
+					<div class="announcement-card" data-id="5">
+					    <div class="flex justify-between items-start mb-2">
+					        <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">普通</span>
+					        <span class="text-gray-500 text-sm">2025-05-20</span>
+					    </div>
+					    <h3 class="text-lg font-semibold mb-2 hover:text-primary transition-colors cursor-pointer announcement-title">已更新系统版本，修复了已知问题</h3>
+					    <p class="text-gray-600 mb-3 line-clamp-2 announcement-content">教评系统完成版本更新，修复了浏览器兼容性、
+						评价提交及数据统计等问题，使用中遇问题可反馈。</p>
+					    <div class="flex justify-between items-center">
+					        <span class="text-sm text-gray-500"><i class="fa fa-eye mr-1"></i> 1876</span>
+					        <button class="text-primary text-sm hover:underline view-details">查看详情 <i class="fa fa-angle-right ml-1"></i></button>
+					    </div>
+					</div>
+                </div>
+                
+                <!-- 分页 -->
+                <div class="flex justify-center mt-8">
+                    <nav class="inline-flex rounded-md shadow-sm">
+                        <a href="#" class="px-3 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">上一页</a>
+                        <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-primary text-sm font-medium text-white">1</a>
+                        <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">2</a>
+                        <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">3</a>
+                        <a href="#" class="px-3 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">下一页</a>
+                    </nav>
+                </div>
+            </div>
+            
+            <!-- 公告详情侧边栏 -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-md p-6 sticky top-24">
+                    <h3 class="text-lg font-bold mb-4 pb-2 border-b border-gray-100">公告详情</h3>
+                    
+                    <div id="announcement-detail">
+                        <div class="text-center py-8 text-gray-500">
+                            <i class="fa fa-file-text-o text-4xl mb-3 opacity-30"></i>
+                            <p>请选择一条公告查看详情</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+   
+
+    <!-- JavaScript -->
+    <script>
+        // 公告详情数据
+        const announcements = {
+            1: {
+                title: "关于系统升级维护的通知",
+                date: "2025-06-30",
+                category: "重要",
+                categoryClass: "bg-red-100 text-red-600",
+                views: 1258,
+                content: `
+                    <p class="mb-4">亲爱的同学们：</p>
+                    <p class="mb-4">因部分师生反馈教评任务尚未完成，为确保大家有充足时间参与教学评价</p>
+                    <ul class="list-disc pl-5 mb-4 space-y-2">
+                        <li>定于 2025 年 7 月 1 日关闭的教评系统，将延迟三日关闭</li>
+                        <li>新的关闭时间为 2025 年 7 月 4 日 23:59</li>
+                        <li>请尚未完成教评的师生尽快登录系统，完成相关评价工作。</li>
+                    </ul>
+                    <p class="mb-4">感谢大家的理解与配合！</p>
+                `
+            },
+            2: {
+                title: "教评系统将于 2025 年 7 月 1 日关闭",
+                date: "2025-06-25",
+                category: "活动",
+                categoryClass: "bg-green-100 text-green-600",
+                views: 3562,
+                content: `
+                    <p class="mb-4">各位老师、同学：</p>
+                    <p class="mb-4">教学评价是保障教学质量的重要环节，为了及时汇总教学评价结果</p>
+                    <p class="mb-4">以便后续开展教学质量分析与改进工作，</p>
+					<p class="mb-4">教评系统将于 2025 年 7 月 1 日 23:59 正式关闭。</p>
+					<p class="mb-4">请全体师生务必在系统关闭前，完成本学期所授课程或所学课程的教学评价。</p>
+					
+                    <p class="mb-4">如有疑问，可联系教务处教学质量管理科。</p>
+                    <p>感谢您的支持，祝您购物愉快！</p>
+                `
+            },
+            3: {
+                title: "未教评的科目不能查看对应成绩",
+                date: "2025-06-22",
+                category: "系统",
+                categoryClass: "bg-blue-100 text-blue-600",
+                views: 2154,
+                content: `
+                    <p class="mb-4">各位同学：</p>
+                    <p class="mb-4">我们很高兴地宣布，新的个人中心功能已正式上线！本次更新包含以下内容：</p>
+                    <h4 class="font-semibold mb-2">学校规定，未完成教学评价的科目，学生将无法查看对应科目的成绩。</h4>
+					<p class="mb-4">请同学们及时登录教评系统，对本学期所学课程进行评价。</p>
+                    <p class="mb-4">评价工作完成后，即可正常查看成绩。</p>
+                    <p>如有特殊情况，请及时与所在学院教学办公室联系。</p>
+                `
+            },
+            4: {
+                title: "教评明日开始",
+                date: "2025-06-20",
+                category: "重要",
+                categoryClass: "bg-gray-100 text-gray-600",
+                views: 1876,
+                content: `
+                    <p class="mb-4">各位老师、同学：</p>
+                    <p class="mb-4">教学评价工作将于明日（2025 年 6 月 21 日）正式开始。</p>
+                    <p class="mb-4">请老师们登录系统，对所授课程的学生学习情况等进行评价；</p>
+                    <p class="mb-4">同学们也请登录系统，对本学期所学课程的教学情况等进行评价。</p>
+					<p class="mb-4">教学评价结果将作为教学质量考核的重要依据，请大家认真对待，</p>
+					<p class="mb-4">客观、公正地完成评价工作。</p>
+                    <p>系统开放时间为每日 8:00-22:00，如有操作问题，可参考系统内的操作指南或联系技术支持人员。</p>
+                `
+            },
+            5: {
+                title: "已更新系统版本，修复了已知问题",
+                date: "2025-05-20",
+                category: "普通",
+                categoryClass: "bg-gray-100 text-gray-600",
+                views: 1876,
+                content: `
+                    <p class="mb-4">各位老师、同学：</p>
+                    <p class="mb-4">为了给大家提供更稳定、更便捷的教评系统使用体验。</p>
+					<p class="mb-4">我们已对教评系统进行了版本更新。</p>
+                    <h4 class="font-semibold mb-2">本次更新主要修复了以下已知问题：</h4>
+                    <ul class="list-disc pl-5 mb-4 space-y-2">
+                        <li>解决了部分浏览器兼容性问题，确保系统在不同浏览器下都能正常运行；</li>
+                        <li>优化了评价提交功能，避免出现提交失败或卡顿的情况；</li>
+                        <li>修复了部分数据统计不准确的问题。</li>
+                    </ul>
+                    <p>系统更新后，如在使用过程中仍遇到问题，请及时反馈给我们！</p>
+                `
+            }
+			
+        };
+
+        // 移动端菜单切换
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 查看公告详情
+        document.querySelectorAll('.view-details, .announcement-title').forEach(button => {
+            button.addEventListener('click', function() {
+                const announcementId = this.closest('.announcement-card').dataset.id;
+                const announcement = announcements[announcementId];
+                
+                // 更新详情区域
+                const detailContainer = document.getElementById('announcement-detail');
+                detailContainer.innerHTML = `
+                    <div class="mb-3">
+                        <span class="${announcement.categoryClass} text-xs px-2 py-1 rounded-full">${announcement.category}</span>
+                        <span class="text-gray-500 text-sm ml-2">${announcement.date}</span>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-4">${announcement.title}</h4>
+                    <div class="text-gray-700 leading-relaxed">
+                        ${announcement.content}
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100 text-sm text-gray-500">
+                        <span><i class="fa fa-eye mr-1"></i> 浏览次数：${announcement.views}</span>
+                    </div>
+                `;
+                
+                // 滚动到详情区域（移动端）
+                if (window.innerWidth < 1024) {
+                    document.getElementById('announcement-detail').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // 搜索功能
+        document.getElementById('search-input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const announcements = document.querySelectorAll('.announcement-card');
+            
+            announcements.forEach(announcement => {
+                const title = announcement.querySelector('.announcement-title').textContent.toLowerCase();
+                const content = announcement.querySelector('.announcement-content').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                    announcement.style.display = 'block';
+                } else {
+                    announcement.style.display = 'none';
+                }
+            });
+        });
+
+        // 滚动时改变导航栏样式
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('py-2');
+                header.classList.remove('py-4');
+                header.classList.add('shadow');
+            } else {
+                header.classList.add('py-4');
+                header.classList.remove('py-2');
+                header.classList.remove('shadow');
+            }
+        });
+    </script>
+</body>
+</html>

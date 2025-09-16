@@ -1,0 +1,157 @@
+{
+  "homeInfo": {
+    "title": "首页",
+    "href": "mokuai/home.html"
+  },
+  "logoInfo": {
+    "title": "评教管理系统",
+    "image": "images/logo.png",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "常规管理",
+      "icon": "fa fa-address-book",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "首页",
+          "href": "mokuai/home.html",
+          "icon": "fa fa-home",
+          "target": "_self"
+        },
+        {
+          "title": "用户管理",
+          "href": "",
+          "icon": "fa fa-group",
+          "target": "_self",
+          "child": [
+          {
+            "title": "添加用户",
+            "href": "user/addUser.html",
+            "icon": "fa fa-plus-square-o",
+            "target": "_self"
+          }, {
+            "title": "查看用户",
+            "href": "user/DleUser.html",
+            "icon": "fa fa-search",
+            "target": "_self"
+          }, {
+            "title": "更改用户",
+            "href": "user/bianji.html",
+            "icon": "fa fa-search",
+            "target": "_self"
+          }
+        ]
+        },
+        {
+          "title": "课程管理",
+          "href": "",
+          "icon": "fa fa-institution",
+          "target": "_self",
+          "child": [
+            {
+              "title": "添加课程",
+              "href": "department/addDept.html",
+              "icon": "fa fa-plus-square-o",
+              "target": "_self"
+            }, {
+              "title": "关联课程与老师",
+              "href": "department/addMajor.html",
+              "icon": "fa fa-plus-circle",
+              "target": "_self"
+            }, {
+              "title": "查看课程信息",
+              "href": "department/findMajor.html",
+              "icon": "fa fa-search-plus",
+              "target": "_self"
+            }, {
+              "title": "更改课程信息",
+              "href": "department/genggai.html",
+              "icon": "fa fa-search-plus",
+              "target": "_self"
+            }
+			
+          ]
+        },
+        {
+          "title": "评教指标管理",
+          "href": "",
+          "icon": "fa fa-male",
+          "target": "_self",
+          "child": [
+            {
+              "title": "创建评教指标体系 ",
+              "href": "member/addMember.html",
+              "icon": "fa fa-plus-circle",
+              "target": "_self"
+            }, {
+              "title": " 调整指标权重 ",
+              "href": "member/findMember.html",
+              "icon": "fa fa-search-plus",
+              "target": "_self"
+            }, {
+              "title": " 启用 / 停用指标",
+              "href": "member/statisMember.html",
+              "icon": "fa fa-bar-chart",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "评教任务管理",
+          "href": "",
+          "icon": "fa fa-trophy",
+          "target": "_self",
+          "child": [
+            {
+              "title": "创建评教任务 ",
+              "href": "competition/addCompet.html",
+              "icon": "fa fa-plus-square-o",
+              "target": "_self"
+            }, {
+              "title": "延期评教时间 ",
+              "href": "competition/findCompet.html",
+              "icon": "fa fa-search",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": " 学生教评",
+          "href": "",
+          "icon": "fa fa-paw",
+          "target": "_self",
+          "child": [
+            {
+              "title": "进行教评",
+              "href": "credit/addCredit.html",
+              "icon": "fa fa-plus-circle",
+              "target": "_self"
+            }, {
+              "title": "查看教评结果",
+              "href": "credit/findCredit.html",
+              "icon": "fa fa-search-plus",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "评教结果统计",
+          "href": "",
+          "icon": "fa fa-eye",
+          "target": "_self",
+          "child": [
+            {
+              "title": "查看评教结果",
+              "href": "jieguo/chakan.html",
+              "icon": "fa fa-plus-square-o",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
